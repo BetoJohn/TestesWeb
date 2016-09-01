@@ -13,7 +13,7 @@
 
                 <h:form id="form">
                     <!--actionListener="{dialogView.dialogViewCadastroDevice()}"-->
-                    <p:commandButton styleClass="newDevice"  value="Novo Dispositivo" onclick="PF('deviceDialogCadastro').show()" icon="ui-icon-document" />
+                    <p:commandButton styleClass="newDevice"  value="Novo Dispositivo" onclick="PF('deviceDialogCadastro1').show()" icon="ui-icon-document" />
                 </h:form>
 
                 <span class="ui-separator">
@@ -94,7 +94,7 @@
                             <p:message for="idDeviceOID" />
                         </h:panelGrid>
 
-                        <p:commandButton  icon="ui-icon-check" update="devices" value="Ok" styleClass="btnOkIdent" ajax ="false" actionListener="#{deviceBean.createNewOID}" action="#{deviceBean.reinit}"/>
+                        <p:commandButton  icon="ui-icon-check" process="@this" update="formInsertIdentOID" value="Ok" styleClass="btnOkIdent" ajax="false" actionListener="#{deviceBean.createNewOID}" action="#{deviceBean.reinit}"/>
 
                     </div>
                 </h:form>

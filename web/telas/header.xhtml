@@ -7,14 +7,14 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <f:facet name="header">
+        <!--<p:graphicImage width="100%" height="50" title="JPortView"  value="res/imagens/jport.jpg"></p:graphicImage>-->
         <p:graphicImage width="100%" height="50" title="JPortView"  value="../res/imagens/jport.jpg"></p:graphicImage>
     </f:facet>
       <h:form id="formPrincipal">
             <p:growl id="messages" showDetail="true"  />
 
-            <p:tabMenu >
-                
-                <p:menuitem value="Início" outcome="index1_1.xhtml"  icon="ui-icon-star">
+            <p:tabMenu >                
+                <p:menuitem value="Início" outcome="index.xhtml"  icon="ui-icon-star">
                     <f:param name="i" value="0" />
                 </p:menuitem>
                 <p:menuitem value="Demos"  icon="ui-icon-search">
