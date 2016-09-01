@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="template.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="menu">
+        <ui:include src="menu.xhtml"></ui:include>
+    </ui:define>
+    <ui:define name="head">
+        <ui:include src="head.xhtml"></ui:include>
+    </ui:define>
+    <ui:define name="conteudo">
+
+        <div align="center" style="position: relative; top: 0px; left: 0px; height: 100px;">
+            <p:graphicImage width="500" url="/resources/icons/index.jpg">
+            </p:graphicImage>
+        </div >
+
+    </ui:define>
+
+</ui:composition>

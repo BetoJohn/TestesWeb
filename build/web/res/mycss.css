@@ -53,6 +53,22 @@ and open the template in the editor.
     border: none;
 }
 
+.ui-layout-unit{
+    border: none;
+}
+.ui-layout-unit-header, .ui-layout-unit-footer{
+    padding: 0em;
+}
+.ui-layout-unit .ui-layout-unit-content{
+    padding: 0em;
+    height: 100%; 
+    overflow: hidden;
+}
+.ui-widget{
+    font-size: 0.9em;
+}
+
+
 /*.header{
   background: url(res/imagens/jport.jpg) no-repeat center center;
   -webkit-background-size: cover;
