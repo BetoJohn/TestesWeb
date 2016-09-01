@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:body>
+        <h:form id="formEdit">
+            
+            <p:outputPanel id="deviceDetail" style="text-align:center;">
+                
+                    <p:panelGrid  columns="2"  rendered="#{not empty deviceBean.selectedDevice}" columnClasses="label,value">
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{deviceBean.selectedDevice.id}" />
+
+                        <h:outputText value="identificação:" />
+                        <h:outputText value="#{deviceBean.selectedDevice.identificacao}" />
+
+                        <h:outputText value="Versão:" />
+                        <h:outputText value="#{deviceBean.selectedDevice.versao}" />
+
+                        <h:outputText value="Comunidade:" />
+                        <h:outputText value="#{deviceBean.selectedDevice.comunidade}" />
+
+                        <h:outputText value="IP:" />
+                        <h:outputText value="#{deviceBean.selectedDevice.ip}" />
+                    </p:panelGrid>
+               
+
+            </p:outputPanel>
+        </h:form>
+    </h:body>
+</html>

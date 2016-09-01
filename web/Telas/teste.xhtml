@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:form id="form">
+        <p:commandButton value="Show Dialog" action="#{dialogView.dialogView()}"></p:commandButton>
+    </h:form>
+    <h:form id="rootform">
+        <p:growl id="growl" showDetail="true" />
+
+        <p:commandButton id="rootbtn" value="View" icon="ui-icon-extlink" actionListener="#{testeBean.openLevel1()}">
+            <!--<p:ajax event="dialogReturn" listener="#{dfRootView.onReturnFromLevel1}" update="growl"/>-->
+        </p:commandButton>
+    </h:form>
+</html>
