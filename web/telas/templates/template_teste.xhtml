@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <link href="${facesContext.externalContext.requestContextPath}/res/mycss.css" rel="stylesheet" type="text/css"/>
+        <!--<h:outputStylesheet name="mycss.css" library="styles"/>-->
+        <!--<ui:insert name="css"/>-->
+        <title>.::\_Port_Monitor_/::.</title>
+    </h:head>
+    
+    <h:body>
+
+        <p:layout fullPage="true">
+
+<!--            <p:layoutUnit position="north" >
+               
+            </p:layoutUnit>-->
+
+            <p:layoutUnit position="center">
+                
+                <h:graphicImage library="imagens" name="jport.jpg" width="100%" height="50" title="JPortView"/>
+                <!--<p:graphicImage width="100%" height="50" title="JPortView" url="../res/imagens/jport.jpg" />-->
+                <h:form>
+                    <p:menubar autoDisplay="false">            
+                        <p:menuitem value="Início" outcome="index_teste.xhtml"  icon="ui-icon-star"/>
+                        <p:menuitem value="Demos" outcome="demo_teste.xhtml" icon="ui-icon-search"/>
+                        <p:menuitem value="Documentation"  icon="ui-icon-document"/>
+                        <p:menuitem value="Support"  icon="ui-icon-wrench"/>
+                        <p:menuitem value="Dashboard" outcome="dashboard_teste.xhtml" icon="ui-icon-person"/>
+                    </p:menubar>
+                </h:form>
+
+                <ui:insert name="conteudo"></ui:insert>
+
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>
