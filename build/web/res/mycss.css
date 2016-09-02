@@ -49,10 +49,6 @@ and open the template in the editor.
 .ui-message-error-detail{
     font-size: 80%;
 }
-.ui-layout-unit {
-    border: none;
-}
-
 .ui-layout-unit{
     border: none;
 }
@@ -66,6 +62,9 @@ and open the template in the editor.
 }
 .ui-widget{
     font-size: 1em;
+}
+.ui-menubar{
+    padding: 0px;
 }
 /*.header{
   background: url(res/imagens/jport.jpg) no-repeat center center;

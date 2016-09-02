@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <p:commandButton  value="Novo Dispositivo" actionListener="#{dialogView.dialogViewCadastroDevice()}" icon="ui-icon-plus"/>
+    <h:form id="form">
+        <!--oncomplete="PF('deviceDialog').show()"-->
+        <p:dataTable id="devices" var="device" value="#{dtColumnsView.devices}" selectionMode="single" rowKey="#{device.identificacao}" selection="#{deviceBean.selectedDevice}"   scrollable="true"  widgetVar="carsTable" filteredValue="#{dtColumnsView.filteredDevices}" 
+                     rows="15"   paginator="true"   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="10,15,20,30,50">         
+            <p:ajax event="rowSelect" listener="#{deviceBean.onRowSelect}" update=":form:deviceDetail" oncomplete="PF('deviceDialog').show()" />
+            <!--<p:ajax event="rowUnselect" listener="#{deviceBean.onRowUnselect}" update=":formPrincipal:messages" />-->
+            <p:columns value="#{dtColumnsView.columns}" var="column" columnIndexVar="colIndex" sortBy="#{device[column.property]}" filterBy="#{device[column.property]}">
+                <f:facet name="header">
+                    <h:outputText value="#{column.header}" />
+                </f:facet>
+                <h:outputText value="#{device[column.property]}" />
+            </p:columns>
+
+        </p:dataTable>
+
+        <p:dialog header="Device" widgetVar="deviceDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
+
+            <p:outputPanel id="deviceDetail" style="text-align:center;">
+
+                <p:panelGrid  columns="2"  rendered="#{not empty deviceBean.selectedDevice}" columnClasses="label,value">
+                    <h:outputText value="Id:" />
+                    <h:inputText value="#{deviceBean.selectedDevice.id}" />
+
+                    <h:outputText value="identificação:" />
+                    <h:inputText value="#{deviceBean.selectedDevice.identificacao}" />
+
+                    <h:outputText value="Versão:" />
+                    <h:inputText value="#{deviceBean.selectedDevice.versao}" />
+
+                    <h:outputText value="Comunidade:" />
+                    <h:inputText value="#{deviceBean.selectedDevice.comunidade}" />
+
+                    <h:outputText value="IP:" />
+                    <h:inputText value="#{deviceBean.selectedDevice.ip}" />
+                </p:panelGrid>
+
+            </p:outputPanel>
+
+            <f:facet name="footer" >
+                <p:toolbar id="toolbarEdit">
+                    <f:facet name="right">
+                        <p:commandButton process="devices" update=":form:deviceDetail" icon="ui-icon-pencil" value="Editar"  />
+                        <span class="ui-separator">
+                            <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                        </span>
+                        <p:commandButton  icon="ui-icon-cancel" value="Cancelar" oncomplete="PF('deviceDialog').hide()" />
+                    </f:facet>
+                    <f:facet name="left">
+                        <!--<p:commandButton icon="fa fa-fw fa-remove" value="Excluir" oncomplete="PF('excluirDevice').hide()" />-->
+                        <p:commandButton value="Excluir" process="@this"  actionListener="#{deviceBean.excluirDevice}" icon="ui-icon-trash" update=":form">
+                            <p:confirm header="Excluir Dispositivo" message="Deseja realmente excluir o dipositivo?" icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <div align="right">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </div>
+                        </p:confirmDialog>
+
+                    </f:facet>
+                </p:toolbar>
+
+            </f:facet>
+
+        </p:dialog>
+
+
+
+
+    </h:form>
+</html>
+
