@@ -67,7 +67,10 @@ and open the template in the editor.
 .ui-widget{
     font-size: 0.9em;
 }
+.imgem{
+   background-image: url(res/imagens/jport.jpg); /* Insere a imagem */
 
+}
 /*.header{
   background: url(res/imagens/jport.jpg) no-repeat center center;
   -webkit-background-size: cover;
