@@ -47,7 +47,7 @@ public class DialogFrameworkView implements Serializable{
         options.put("responsive", true);
 //        options.put("contentHeight", 540);
 //        options.put("contentWidth", 560);
-        RequestContext.getCurrentInstance().openDialog("Telas/dialogEditDevice", options, null);
+        RequestContext.getCurrentInstance().openDialog("dialogEditDevice", options, null);
        
     }
     

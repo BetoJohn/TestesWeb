@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/web/telas/template.xhtml</file>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/web/telas/dashboard.xhtml</file>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/web/telas/conteudoIndex.xhtml</file>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/web/telas/dialogCadastro.xhtml</file>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/testes/bean/DeviceBean.java</file>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/web/telas/index.xhtml</file>
+            <file>file:/D:/Projetos%20Variados/TestesWeb/web/pages/index_principal.xhtml</file>
+            <file>file:/D:/Projetos%20Variados/TestesWeb/web/pages/table_teste.xhtml</file>
+            <file>file:/D:/Projetos%20Variados/TestesWeb/src/java/br/com/testes/bean/DeviceBean.java</file>
         </group>
     </open-files>
 </project-private>

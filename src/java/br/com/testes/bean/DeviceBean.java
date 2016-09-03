@@ -27,6 +27,7 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.RowEditEvent;
+
 /**
  *
  * @author carlos.macedo
@@ -57,7 +58,6 @@ public class DeviceBean implements Serializable {
         device.setOid(oid);
         return null;
     }
-    
 
     public void createNewDevice(ActionEvent event) {
         SnmpBO.getInstance().saveDevice(device);
@@ -65,8 +65,13 @@ public class DeviceBean implements Serializable {
         RequestContext.getCurrentInstance().update("formTableDevices");
     }
 
+    public void editDevice() {
+        System.out.println("Device Edit: " + device.toString());
+        RequestContext.getCurrentInstance().execute("PF('deviceDialog').hide()");
+    }
+
     public void excluirDevice() {
-        System.out.println("Device: "+selectedDevice.getIdentificacao());
+        System.out.println("Device: " + selectedDevice.getIdentificacao());
         RequestContext.getCurrentInstance().execute("PF('deviceDialog').hide()");
     }
 
@@ -84,18 +89,19 @@ public class DeviceBean implements Serializable {
     }
 
     public void onRowSelect(SelectEvent eventSelect) {
-        FacesMessage msg;
-        msg = new FacesMessage("Device Selected", " " + ((Device) eventSelect.getObject()).getIdentificacao());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println("Device Selected: "+ ((Device) eventSelect.getObject()).getIdentificacao());
-       
+        device = selectedDevice;
+//        FacesMessage msg;
+//        msg = new FacesMessage("Device Selected", " " + ((Device) eventSelect.getObject()).getIdentificacao());
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+        System.out.println("Device Selected: " + ((Device) eventSelect.getObject()).getIdentificacao());
 
     }
+
     public void onRowEdit(RowEditEvent event) {
 //        FacesMessage msg;
 //        msg = new FacesMessage("Device Selected", " " + ((Device) event.getObject()).getIdentificacao());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
-        System.out.println("Device Selected"+ ((Device) event.getObject()).getIdentificacao());
+        System.out.println("Device Selected" + ((Device) event.getObject()).getIdentificacao());
 
     }
 

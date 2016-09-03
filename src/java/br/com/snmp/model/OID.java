@@ -5,11 +5,13 @@
  */
 package br.com.snmp.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author carlos.macedo
  */
-public class OID {
+public class OID implements Serializable {
     private String descricao;
     private int portInicial;
     private int portFinal;
