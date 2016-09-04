@@ -66,6 +66,10 @@ and open the template in the editor.
 .ui-menubar{
     padding: 0px;
 }
+
+.deviceDialog{
+    font-size: 90%;
+}
 /*.header{
   background: url(res/imagens/jport.jpg) no-repeat center center;
   -webkit-background-size: cover;

@@ -62,7 +62,7 @@ public class DeviceBean implements Serializable {
     public void createNewDevice(ActionEvent event) {
         SnmpBO.getInstance().saveDevice(device);
         System.out.println(device.toString() + " - " + oid.toString());
-        RequestContext.getCurrentInstance().update("formTableDevices");
+        RequestContext.getCurrentInstance().update("form:devices");
     }
 
     public void editDevice() {
