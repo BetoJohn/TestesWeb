@@ -28,93 +28,112 @@
     </h:form>
 
     <p:dialog header="Cadastro Dispositivo" widgetVar="cadastroDispositivoDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
-       
-            <p:tabView>
 
-                <p:tab title="Cadastro Dispositivo">
-                    <h:form id="formCadastro"  prependId="false">
-                        <h:panelGrid columns="2" cellpadding="5" >
+        <p:tabView widgetVar="tabView">
 
-
-                            <h:outputLabel for="idDevice" value="Identificação:" />
-                            <h:panelGrid columns="1"  >
-                                <p:inputText id="idDevice" value="#{deviceBean.device.identificacao}" required="true" label="Device" size="37"/>
-                                <div style="font-size: 50%">
-                                    <p:message for="idDevice" />
-                                </div>
-                            </h:panelGrid>
-
-                            <h:outputLabel for="version" value="Versão:" />
-                            <h:panelGrid columns="1"  >
-                                <p:inputText id="version" value="#{deviceBean.device.versao}" required="true" label="Versão" size="37"/>
-                                <p:message for="version" />
-                            </h:panelGrid>
-
-                            <p:outputLabel value="OID:" for="dd" />
-                            <h:panelGrid columns="1"  >
-                                <p:autoComplete  id="dd" dropdown="true" value="#{deviceBean.oid.descricao}" required="true" size="33" completeMethod="#{deviceBean.completeOID}"/>
-                                <p:message for="dd" />
-                            </h:panelGrid>
-
-                            <h:outputLabel for="oidini" value="Porta Inicial:" />
-                            <h:panelGrid columns="1"  >
-                                <p:inputText id="oidini" type="number" value="#{deviceBean.oid.portInicial}" required="true" label="Porta Inicial" size="37"/>
-                                <p:message for="oidini" />
-                            </h:panelGrid>
+            <p:tab title="Cadastro Dispositivo" >
+                <h:form id="formCadastro"  prependId="false">
+                    <h:panelGrid columns="2" cellpadding="5" >
 
 
-                            <h:outputLabel for="oidfinal" value="Porta Final:" />
-                            <h:panelGrid columns="1"  >
-                                <p:inputText id="oidfinal" value="#{deviceBean.oid.portFinal}" required="true" label="Porta Final" size="37"/>
-                                <p:message for="oidfinal" />
-                            </h:panelGrid>
-
-                            <h:outputLabel for="comunidade" value="Comunidade:" />
-                            <h:panelGrid columns="1"  >
-                                <p:inputText id="comunidade" value="#{deviceBean.device.comunidade}" required="true" label="Comunidade" size="37"/>
-                                <p:message for="comunidade" />
-                            </h:panelGrid>
-
-                            <h:outputLabel for="ip" value="IP:" />
-                            <h:panelGrid columns="1"  >
-                                <p:inputText id="ip" value="#{deviceBean.device.ip}" required="true" label="IP"  size="37"/>
-                                <p:watermark for="ip" value="Ex.: 255.255.255.255" id="watermark" />
-                                <p:message for="ip" />
-                            </h:panelGrid>
-
+                        <h:outputLabel for="idDevice" value="Identificação:" />
+                        <h:panelGrid columns="1"  >
+                            <p:inputText id="idDevice" value="#{deviceBean.device.identificacao}" required="true" label="Device" size="37"/>
+                            <div style="font-size: 50%">
+                                <p:message for="idDevice" />
+                            </div>
                         </h:panelGrid>
-                        <div align="center" >
+
+                        <h:outputLabel for="version" value="Versão:" />
+                        <h:panelGrid columns="1"  >
+                            <p:inputText id="version" value="#{deviceBean.device.versao}" required="true" label="Versão" size="37"/>
+                            <p:message for="version" />
+                        </h:panelGrid>
+
+                        <p:outputLabel value="OID:" for="dd" />
+                        <h:panelGrid columns="1"  >
+                            <p:autoComplete  id="dd" dropdown="true" value="#{deviceBean.oid.descricao}" required="true" size="33" completeMethod="#{deviceBean.completeOID}"/>
+                            <p:message for="dd" />
+                        </h:panelGrid>
+
+                        <h:outputLabel for="oidini" value="Porta Inicial:" />
+                        <h:panelGrid columns="1"  >
+                            <p:inputText id="oidini" type="number" value="#{deviceBean.oid.portInicial}" required="true" label="Porta Inicial" size="37"/>
+                            <p:message for="oidini" />
+                        </h:panelGrid>
+
+
+                        <h:outputLabel for="oidfinal" value="Porta Final:" />
+                        <h:panelGrid columns="1"  >
+                            <p:inputText id="oidfinal" value="#{deviceBean.oid.portFinal}" required="true" label="Porta Final" size="37"/>
+                            <p:message for="oidfinal" />
+                        </h:panelGrid>
+
+                        <h:outputLabel for="comunidade" value="Comunidade:" />
+                        <h:panelGrid columns="1"  >
+                            <p:inputText id="comunidade" value="#{deviceBean.device.comunidade}" required="true" label="Comunidade" size="37"/>
+                            <p:message for="comunidade" />
+                        </h:panelGrid>
+
+                        <h:outputLabel for="ip" value="IP:" />
+                        <h:panelGrid columns="1"  >
+                            <p:inputText id="ip" value="#{deviceBean.device.ip}" required="true" label="IP"  size="37"/>
+                            <p:watermark for="ip" value="Ex.: 255.255.255.255" id="watermark" />
+                            <p:message for="ip" />
+                        </h:panelGrid>
+
+                    </h:panelGrid>
+                    <div align="center" >
+
+                        <h:panelGrid columns="3" cellpadding="5">
                             <p:commandButton  icon="ui-icon-disk" value="Salvar"  styleClass="save"  update="formCadastro" actionListener="#{deviceBean.createNewDevice}" action="#{deviceBean.reinit}">
-                                <!--<p:collector value="#{deviceBean.device}" addTo="#{deviceBean.listDevices}" unique="true"/>-->
+                     <!--<p:collector value="#{deviceBean.device}" addTo="#{deviceBean.listDevices}" unique="true"/>-->
                             </p:commandButton>
+                            <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                            </span>
+                            <p:commandButton  icon="ui-icon-cancel" value="Sair" oncomplete="PF('cadastroDispositivoDialog').hide()"/>
+                        </h:panelGrid>
+
+
+                    </div>
+                </h:form>
+            </p:tab>
+            <p:tab title="Novo OID">
+                <p:fieldset legend="OID" style="margin-bottom:20px">
+                    <h:form id="formInsertIdentOID" >
+                        <div align="center" class="divBtnOk">
+                            <h:panelGrid columns="1" cellpadding="5" style="margin-top: 10px">
+                                <p:inputText id="idDeviceOID" value="#{deviceBean.oid.descricao}" style="width: 300px" required="true" label="OID" />         
+                                <p:message for="idDeviceOID" />
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <p:commandButton update="formInsertIdentOID" icon="ui-icon-check"  value="Salvar" styleClass="btnOkIdent" actionListener="#{deviceBean.createNewOID}" action="#{deviceBean.reinit}"/>
+                                <span class="ui-separator">
+                                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                </span>
+                                <p:commandButton  icon="ui-icon-cancel" value="Sair" oncomplete="PF('cadastroDispositivoDialog').hide()"/>
+                            </h:panelGrid>
+
+
+
+
 
                         </div>
                     </h:form>
-                </p:tab>
-                <p:tab title="Novo OID">
-                    <p:fieldset legend="OID" style="margin-bottom:20px">
-                        <h:form id="formInsertIdentOID" >
-                            <div align="center" class="divBtnOk">
-                                <h:panelGrid columns="1" cellpadding="5" style="margin-top: 10px">
-                                    <p:inputText id="idDeviceOID" value="#{deviceBean.oid.descricao}" style="width: 300px" required="true" label="OID" />         
-                                    <p:message for="idDeviceOID" />
-                                </h:panelGrid>
 
-                                <p:commandButton update="formInsertIdentOID" icon="ui-icon-check"  value="Ok" styleClass="btnOkIdent" actionListener="#{deviceBean.createNewOID}" action="#{deviceBean.reinit}"/>
+                </p:fieldset>
 
-                            </div>
-                        </h:form>
-                    </p:fieldset>
+            </p:tab>
 
-                </p:tab>
-
-            </p:tabView>
+        </p:tabView>
 
 
-        
+
     </p:dialog>   
 
-    <p:dialog header="Device" widgetVar="deviceDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
+    <p:dialog header="Dispositivo #{deviceBean.selectedDevice.identificacao}" widgetVar="deviceDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
         <h:form id="formEditar">
             <p:outputPanel id="deviceDetail" style="text-align:center;">
 
@@ -166,36 +185,29 @@
                         <p:message for="ip" />
                     </h:panelGrid>
                 </p:panelGrid>
-                <p:commandButton update="formEditar"  actionListener="#{deviceBean.editDevice()}" action="#{deviceBean.reinit}" icon="ui-icon-pencil" value="Editar"  />
+
             </p:outputPanel>
+            <h:panelGrid columns="6" cellpadding="3">
+                <p:commandButton  update="formEditar" styleClass="edit" actionListener="#{deviceBean.editDevice()}" action="#{deviceBean.reinit}" icon="ui-icon-pencil" value="Editar"  />
+                <span class="ui-separator">
+                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                </span>
+                <p:commandButton value="Excluir" process="@this"  actionListener="#{deviceBean.excluirDevice}" action="#{deviceBean.reinit}" icon="ui-icon-trash" >
+                    <p:confirm header="Excluir Dispositivo" message="Deseja realmente excluir o dipositivo?" icon="ui-icon-alert" />
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <div align="right">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('deviceDialog').hide()"/>
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </div>
+                </p:confirmDialog>
+                <span class="ui-separator">
+                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                </span>
+                <p:commandButton  icon="ui-icon-cancel" value="Cancelar" oncomplete="PF('deviceDialog').hide()" />
+                <!--<p:commandButton icon="fa fa-fw fa-remove" value="Excluir" oncomplete="PF('excluirDevice').hide()" />-->
 
-
-
-            <p:toolbar id="toolbarEdit">
-                <f:facet name="right">
-                    <p:commandButton process="@this" update="formEditar"  actionListener="#{deviceBean.editDevice()}" action="#{deviceBean.reinit}" icon="ui-icon-pencil" value="Editar"  />
-                    <span class="ui-separator">
-                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
-                    </span>
-                    <p:commandButton  icon="ui-icon-cancel" value="Cancelar" oncomplete="PF('deviceDialog').hide()" />
-                </f:facet>
-
-                <f:facet name="left">
-                    <!--<p:commandButton icon="fa fa-fw fa-remove" value="Excluir" oncomplete="PF('excluirDevice').hide()" />-->
-                    <p:commandButton value="Excluir" process="@this"  actionListener="#{deviceBean.excluirDevice}" action="#{deviceBean.reinit}" icon="ui-icon-trash" >
-                        <p:confirm header="Excluir Dispositivo" message="Deseja realmente excluir o dipositivo?" icon="ui-icon-alert" />
-                    </p:commandButton>
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <div align="right">
-
-                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('deviceDialog').hide()"/>
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-
-                        </div>
-                    </p:confirmDialog>
-
-                </f:facet>
-            </p:toolbar>
+            </h:panelGrid>
 
 
 

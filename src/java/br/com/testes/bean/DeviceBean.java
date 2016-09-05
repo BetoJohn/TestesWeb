@@ -58,6 +58,8 @@ public class DeviceBean implements Serializable {
         device.setOid(oid);
         return null;
     }
+    
+  
 
     public void createNewDevice(ActionEvent event) {
         SnmpBO.getInstance().saveDevice(device);
@@ -89,7 +91,9 @@ public class DeviceBean implements Serializable {
     }
 
     public void onRowSelect(SelectEvent eventSelect) {
+        oid = selectedDevice.getOid();
         device = selectedDevice;
+        device.setOid(oid);
 //        FacesMessage msg;
 //        msg = new FacesMessage("Device Selected", " " + ((Device) eventSelect.getObject()).getIdentificacao());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
