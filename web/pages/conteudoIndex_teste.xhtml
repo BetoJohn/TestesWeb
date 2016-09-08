@@ -11,7 +11,22 @@
 
     <h:form id="form">
         <p:commandButton id="btnNewDevice" update="@(form)" value="Novo Dispositivo"  oncomplete="PF('cadastroDispositivoDialog').show()" icon="ui-icon-plus" />
-        
+        <p:toolbar>
+            <f:facet name="right">
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputPanel>
+                        <p:inputText  id="filter" onkeyup="PF('tableDevices').filter()" style="width:200px" placeholder="Pesquisa"/>
+                    </p:outputPanel>
+
+                    <h:commandLink>
+                        <p:graphicImage  library="imagens" name="pdf.png" width="24"/>
+                        <p:dataExporter type="pdf" target="devices" fileName="Dispositivos" />
+                    </h:commandLink>
+                </h:panelGrid>
+            </f:facet>
+
+        </p:toolbar>
+
         <p:dataTable id="devices" widgetVar="tableDevices" emptyMessage="Nenhum Dispositivo Cadastrado!" var="dev" value="#{deviceBean.listDevices}" reflow="true"
                      rowKey="#{dev.ip}" selectionMode="single" selection="#{deviceBean.selectedDevice}" scrollWidth="true" scrollable="true"
                      rows="10"   paginator="true"   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -19,12 +34,20 @@
 
             <p:ajax event="rowSelect" listener="#{deviceBean.onRowSelect}" update=":formEditar:deviceDetail" oncomplete="PF('deviceDialog').show()" />
 
-            <f:facet name="header">
-                <div align="right">
-                    <p:outputPanel>
-                        <h:outputText value="Search all fields:" />
-                        <p:inputText  id="globalFilter" onkeyup="PF('devicesTable').filter()" style="width:200px" placeholder="Pesquisa"/>
-                    </p:outputPanel>
+             <f:facet name="header">
+
+                <div align="left" style="width: 600px">
+                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:outputPanel>
+                            <h:outputText value="Search all fields:" />
+                            <p:inputText  id="globalFilter" onkeyup="PF('tableDevices').filter(#{deviceSnmpBean.device.identificacao})" style="width:200px" placeholder="Pesquisa"/>
+                        </p:outputPanel>
+
+                        <h:commandLink>
+                            <p:graphicImage  library="imagens" name="pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="devices" fileName="Dispositivos" />
+                        </h:commandLink>
+                    </h:panelGrid>
                 </div>
             </f:facet>
 
