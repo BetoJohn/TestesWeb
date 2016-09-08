@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <link href="res/mycss.css" rel="stylesheet" type="text/css"/>
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>.::\_Port_Monitor_/::.</title>
+
+            </f:facet>
+            <style type="text/css">
+                .ui-layout-unit{
+                    border: none;
+                }
+            </style>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+
+                <p:layoutUnit style=" border: none" position="center">
+                    <f:facet name="header">
+                        <p:graphicImage width="100%" height="60" title="JPortView"  value="res/imagens/jport.jpg"></p:graphicImage>
+                    </f:facet>
+
+                    <h:form id="formPrincipal">
+                        <p:growl id="messages" showDetail="true"  />
+                        <p:tabMenu activeIndex="#{param.i}">
+                            <p:menuitem value="Novo Dispositivo" actionListener="#{dialogView.dialogViewCadastroDevice()}" icon="ui-icon-star">
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
+                            <p:menuitem value="Demos"  icon="ui-icon-search">
+                                <f:param name="i" value="1" />
+                            </p:menuitem>
+                            <p:menuitem value="Documentation"  icon="ui-icon-document">
+                                <f:param name="i" value="2" />
+                            </p:menuitem>
+                            <p:menuitem value="Support"  icon="ui-icon-wrench">
+                                <f:param name="i" value="3" />
+                            </p:menuitem>
+                            <p:menuitem value="Dashboard" outcome="welcomePrimefaces.xhtml" icon="ui-icon-person">
+                                <f:param name="i" value="4" />
+                            </p:menuitem>
+                        </p:tabMenu>
+
+
+                    </h:form>
+
+                    <h:form id="form">
+                        <!--oncomplete="PF('deviceDialog').show()"-->
+                        <p:dataTable id="devices" var="device" value="#{dtColumnsView.devices}" selectionMode="single" rowKey="#{device.identificacao}" selection="#{deviceBean.selectedDevice}"   scrollable="true"  widgetVar="carsTable" filteredValue="#{dtColumnsView.filteredDevices}" 
+                                     rows="15"   paginator="true"   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20,30,50">         
+                            <p:ajax event="rowSelect" listener="#{deviceBean.onRowSelect}" update=":formEditar:deviceDetail"  oncomplete="PF('deviceDialog').show()" />
+                            <!--<p:ajax event="rowUnselect" listener="#{deviceBean.onRowUnselect}" update=":formPrincipal:messages" />-->
+                            <p:columns value="#{dtColumnsView.columns}" var="column" columnIndexVar="colIndex" sortBy="#{device[column.property]}" filterBy="#{device[column.property]}">
+                                <f:facet name="header">
+                                    <h:outputText value="#{column.header}" />
+                                </f:facet>
+                                <h:outputText value="#{device[column.property]}" />
+                            </p:columns>
+
+                        </p:dataTable>
+
+
+
+
+
+
+                    </h:form>
+                    <p:dialog header="Device" widgetVar="deviceDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
+                        <h:form id="formEditar">
+                            <p:outputPanel id="deviceDetail" style="text-align:center;">
+
+                                <p:panelGrid  columns="2"  rendered="#{not empty deviceBean.selectedDevice}" columnClasses="label,value">
+                                    <h:outputText value="Id:" />
+                                    <h:inputText value="#{deviceBean.device.id}" />
+
+                                    <h:outputText value="identificação:" />
+                                    <h:inputText value="#{deviceBean.device.identificacao}" />
+
+                                    <h:outputText value="Versão:" />
+                                    <h:inputText value="#{deviceBean.device.versao}" />
+
+                                    <h:outputText value="Comunidade:" />
+                                    <h:inputText value="#{deviceBean.device.comunidade}" />
+
+                                    <h:outputText value="IP:" />
+                                    <h:inputText value="#{deviceBean.device.ip}" />
+                                </p:panelGrid>
+
+                            </p:outputPanel>
+
+
+
+                            <p:toolbar id="toolbarEdit">
+                                <f:facet name="right">
+                                    <p:commandButton process="@this" update="formEditar" ajax="false" actionListener="#{deviceBean.editDevice()}" icon="ui-icon-pencil" value="Editar"  />
+                                    <span class="ui-separator">
+                                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                    </span>
+                                    <p:commandButton  icon="ui-icon-cancel" value="Cancelar" oncomplete="PF('deviceDialog').hide()" />
+                                </f:facet>
+                                
+                                <f:facet name="left">
+                                    <!--<p:commandButton icon="fa fa-fw fa-remove" value="Excluir" oncomplete="PF('excluirDevice').hide()" />-->
+                                    <p:commandButton value="Excluir" process="@this"  actionListener="#{deviceBean.excluirDevice}" icon="ui-icon-trash" update=":formPrincipal:messages">
+                                        <p:confirm header="Excluir Dispositivo" message="Deseja realmente excluir o dipositivo?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <div align="right">
+
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('deviceDialog').hide()"/>
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+                                        </div>
+                                    </p:confirmDialog>
+
+                                </f:facet>
+                            </p:toolbar>
+
+
+
+                        </h:form>
+                    </p:dialog>                          
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

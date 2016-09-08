@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -220,7 +220,7 @@
                     </f:facet>
                     <f:facet name="left">
                         <!--<p:commandButton icon="fa fa-fw fa-remove" value="Excluir" oncomplete="PF('excluirDevice').hide()" />-->
-                        <p:commandButton value="Excluir" process="@this"  actionListener="#{deviceBean.excluirDevice}" icon="ui-icon-trash" update=":formPrincipal:messages">
+                        <p:commandButton value="Excluir" process="@this"  actionListener="#{deviceBean.excluirDevice}" icon="ui-icon-trash" >
                             <p:confirm header="Excluir Dispositivo" message="Deseja realmente excluir o dipositivo?" icon="ui-icon-alert" />
                         </p:commandButton>
 
@@ -242,5 +242,5 @@
 
 
     </h:form>
-</ui:composition>
+</html>
 

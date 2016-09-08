@@ -26,7 +26,7 @@ and open the template in the editor.
 }
 /*Fontes do cabeçalho da tabela*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
-    font-size: 80%;
+    font-size: 90%;
 }
 .ui-datatable tbody td{
     text-align: center;
@@ -36,23 +36,26 @@ and open the template in the editor.
 }
 
 .save{
-    height: 35px; 
+    /*height: 35px;*/ 
     width: 200px;
-    margin-bottom: 10px; 
+    /*margin-bottom: 10px;*/ 
+    horizontal-align:center; 
+    font-size: 50px
+}
+.edit{
+    /*height: 35px;*/ 
+    width: 120px;
+    /*margin-bottom: 10px;*/ 
     horizontal-align:center; 
     font-size: 50px
 }
 .btnOkIdent{
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     width: 100px;
 }
 .ui-message-error-detail{
     font-size: 80%;
 }
-.ui-layout-unit {
-    border: none;
-}
-
 .ui-layout-unit{
     border: none;
 }
@@ -62,13 +65,18 @@ and open the template in the editor.
 .ui-layout-unit .ui-layout-unit-content{
     padding: 0em;
     height: 100%; 
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .ui-widget{
     font-size: 1em;
 }
+.ui-menubar{
+    padding: 0px;
+}
 
-
+.deviceDialog{
+    font-size: 90%;
+}
 /*.header{
   background: url(res/imagens/jport.jpg) no-repeat center center;
   -webkit-background-size: cover;
