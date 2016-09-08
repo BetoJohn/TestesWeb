@@ -65,7 +65,7 @@ and open the template in the editor.
 .ui-layout-unit .ui-layout-unit-content{
     padding: 0em;
     height: 100%; 
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .ui-widget{
     font-size: 1em;

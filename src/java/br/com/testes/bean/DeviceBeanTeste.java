@@ -32,10 +32,10 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author carlos.macedo
  */
-@ManagedBean
+@ManagedBean(name = "deviceBean")
 @SessionScoped
 //@RequestScoped
-public class DeviceBean implements Serializable {
+public class DeviceBeanTeste implements Serializable {
 
     private Device device;
     private OID oid;

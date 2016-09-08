@@ -10,20 +10,51 @@
 
 
     <h:form id="form">
-        <p:commandButton  value="Novo Dispositivo" oncomplete="PF('cadastroDispositivoDialog').show()" icon="ui-icon-plus"/>
-        <!--oncomplete="PF('deviceDialog').show()"-->
-        <p:dataTable id="devices" var="device" value="#{dtColumnsView.devices}" selectionMode="single" rowKey="#{device.identificacao}" selection="#{deviceBean.selectedDevice}"   scrollable="true"  widgetVar="carsTable" filteredValue="#{dtColumnsView.filteredDevices}" 
-                     rows="15"   paginator="true"   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                     rowsPerPageTemplate="10,15,20,30,50">         
-            <p:ajax event="rowSelect" listener="#{deviceBean.onRowSelect}" update=":formEditar:deviceDetail"  oncomplete="PF('deviceDialog').show()" />
-            <!--<p:ajax event="rowUnselect" listener="#{deviceBean.onRowUnselect}" update=":formPrincipal:messages" />-->
-            <p:columns value="#{dtColumnsView.columns}" var="column" columnIndexVar="colIndex" sortBy="#{device[column.property]}" filterBy="#{device[column.property]}">
-                <f:facet name="header">
-                    <h:outputText value="#{column.header}" />
-                </f:facet>
-                <h:outputText value="#{device[column.property]}" />
-            </p:columns>
+        <p:commandButton id="btnNewDevice" update="@(form)" value="Novo Dispositivo"  oncomplete="PF('cadastroDispositivoDialog').show()" icon="ui-icon-plus" />
+        
+        <p:dataTable id="devices" widgetVar="tableDevices" emptyMessage="Nenhum Dispositivo Cadastrado!" var="dev" value="#{deviceBean.listDevices}" reflow="true"
+                     rowKey="#{dev.ip}" selectionMode="single" selection="#{deviceBean.selectedDevice}" scrollWidth="true" scrollable="true"
+                     rows="10"   paginator="true"   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="10,20,30,50">    
 
+            <p:ajax event="rowSelect" listener="#{deviceBean.onRowSelect}" update=":formEditar:deviceDetail" oncomplete="PF('deviceDialog').show()" />
+
+            <f:facet name="header">
+                <div align="right">
+                    <p:outputPanel>
+                        <h:outputText value="Search all fields:" />
+                        <p:inputText  id="globalFilter" onkeyup="PF('devicesTable').filter()" style="width:200px" placeholder="Pesquisa"/>
+                    </p:outputPanel>
+                </div>
+            </f:facet>
+
+            <p:column  sortBy="#{dev.id}" headerText="Id" filterBy="#{dev.id}" filterMatchMode="contains">
+                <h:outputText value="#{dev.id}" />
+            </p:column>
+
+            <p:column  sortBy="#{dev.ip}" headerText="IP" filterBy="#{dev.ip}" filterMatchMode="contains">
+                <h:outputText value="#{dev.ip}" />
+            </p:column>
+
+            <p:column headerText="Identificação" sortBy="#{dev.identificacao}" filterBy="#{dev.identificacao}">
+                <h:outputText value="#{dev.identificacao}" />
+            </p:column>
+
+            <p:column  headerText="Versão" sortBy="#{dev.versao}" filterBy="#{dev.versao}">
+                <h:outputText value="#{dev.versao}" />
+            </p:column>
+
+            <p:column headerText="Comunidade" sortBy="#{dev.comunidade}" filterBy="#{dev.comunidade}">
+                <h:outputText value="#{dev.comunidade}" />
+            </p:column>
+
+            <p:column  headerText="Porta Inicial" >
+                <h:outputText value="#{dev.oid.portInicial}" />
+            </p:column>
+
+            <p:column  headerText="Porta Final" >
+                <h:outputText value="#{dev.oid.portFinal}" />
+            </p:column>
         </p:dataTable>
     </h:form>
 
@@ -32,7 +63,7 @@
         <p:tabView widgetVar="tabView">
 
             <p:tab title="Cadastro Dispositivo" >
-                <h:form id="formCadastro"  prependId="false">
+                <h:form id="formCadastro" >
                     <h:panelGrid columns="2" cellpadding="5" >
 
 
@@ -133,8 +164,8 @@
 
     </p:dialog>   
 
-    <p:dialog header="Dispositivo #{deviceBean.selectedDevice.identificacao}" widgetVar="deviceDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
-        <h:form id="formEditar">
+    <p:dialog header="Dispositivo #{deviceBean.selectedDevice.identificacao}"  widgetVar="deviceDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
+        <h:form id="formEditar" >
             <p:outputPanel id="deviceDetail" style="text-align:center;">
 
                 <p:panelGrid  columns="2"  rendered="#{not empty deviceBean.selectedDevice}" columnClasses="label,value">
@@ -188,7 +219,9 @@
 
             </p:outputPanel>
             <h:panelGrid columns="6" cellpadding="3">
-                <p:commandButton  update="formEditar" styleClass="edit" actionListener="#{deviceBean.editDevice()}" action="#{deviceBean.reinit}" icon="ui-icon-pencil" value="Editar"  />
+                <p:commandButton  update="formEditar" styleClass="edit" actionListener="#{deviceBean.editDevice()}" action="#{deviceBean.reinit}" icon="ui-icon-pencil" value="Editar"  >
+                 <p:confirm header="Editar Dispositivo" message="Deseja realmente editar o dipositivo?" icon="ui-icon-alert" />
+                </p:commandButton>
                 <span class="ui-separator">
                     <span class="ui-icon ui-icon-grip-dotted-vertical" />
                 </span>
