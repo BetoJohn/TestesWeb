@@ -44,12 +44,20 @@
                         <p:menuitem value="Início" outcome="index_teste.xhtml"  icon="ui-icon-star"/>
                         <p:menuitem value="Demos" outcome="demo_teste.xhtml" icon="ui-icon-search"/>
                         <p:menuitem value="Documentation"  icon="ui-icon-document"/>
-                        <p:menuitem value="Support"  icon="ui-icon-wrench"/>
+                        <p:submenu label="Gerenciador" icon="ui-icon-gear">
+                            <p:menuitem value="Ativar Captura" actionListener="#{snmpBean.getSnmp}" icon="ui-icon-arrowreturnthick-1-w" />
+                            <p:menuitem value="Desativar Captura" actionListener="#{snmpBean.breakGetSnmp}" icon="ui-icon-arrowreturnthick-1-e" />
+                            <p:menuitem value="Status" actionListener="#{snmpBean.getStatus}" icon="ui-icon-arrowreturnthick-1-e" />
+                        </p:submenu>
                         <p:menuitem value="Dashboard" outcome="dashboard_teste.xhtml" icon="ui-icon-person"/>
                     </p:menubar>
                 </h:form>
+                
+                <p:growl id="messages" showDetail="true"   />
+                
+                <ui:insert name="conteudo">
 
-                <ui:insert name="conteudo"></ui:insert>
+                </ui:insert>
 
             </p:layoutUnit>
 

@@ -10,14 +10,25 @@
 
 
     <h:form id="form">
+
         <p:commandButton id="btnNewDevice" update="@(form)" value="Novo Dispositivo"  oncomplete="PF('cadastroDispositivoDialog').show()" icon="ui-icon-plus" />
+        <p:commandButton id="btnUpdateTable" update="@(form)" value="Dispositivos" icon="ui-icon-refresh" actionListener="#{deviceBean.getAllDevices}"/>
         <p:toolbar>
             <f:facet name="right">
-                <h:panelGrid columns="3" cellpadding="5">
-                    <p:outputPanel>
-                        <p:inputText  id="filter" onkeyup="PF('tableDevices').filter()" style="width:200px" placeholder="Pesquisa"/>
-                    </p:outputPanel>
 
+
+
+                <h:panelGrid columns="5" cellpadding="5">
+                    <!--                    <p:outputPanel>
+                                            <p:inputText  id="filtro" onkeyup="PF('tableDevices').filter()" style="width:200px" placeholder="Pesquisa"/>
+                                        </p:outputPanel>-->
+                    <p:selectOneMenu id="filterBy" value="#{deviceBean.filterBy}" style="width:120px">        
+                        <f:selectItem itemLabel="Filtrar por:" itemValue="default" noSelectionOption="true" />
+                        <f:selectItems value="#{deviceBean.listFilter}" />
+                    </p:selectOneMenu>
+
+                    <p:inputText  id="filter" value="#{deviceBean.search}" style="width:200px" placeholder="Pesquisa"/>
+                    <p:commandButton update="form:devices" icon="ui-icon-search" actionListener="#{deviceBean.getByIdentificacao}"/>
                     <h:commandLink>
                         <p:graphicImage  library="imagens" name="pdf.png" width="24"/>
                         <p:dataExporter type="pdf" target="devices" fileName="Dispositivos" />
@@ -28,28 +39,28 @@
         </p:toolbar>
 
         <p:dataTable id="devices" widgetVar="tableDevices" emptyMessage="Nenhum Dispositivo Cadastrado!" var="dev" value="#{deviceBean.listDevices}" reflow="true"
-                     rowKey="#{dev.ip}" selectionMode="single" selection="#{deviceBean.selectedDevice}" scrollWidth="true" scrollable="true"
+                     rowKey="#{dev.ip}" selectionMode="single" selection="#{deviceBean.selectedDevice}" scrollWidth="true" 
                      rows="10"   paginator="true"   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="10,20,30,50">    
 
             <p:ajax event="rowSelect" listener="#{deviceBean.onRowSelect}" update=":formEditar:deviceDetail" oncomplete="PF('deviceDialog').show()" />
 
-             <f:facet name="header">
-
-                <div align="left" style="width: 600px">
-                    <h:panelGrid columns="3" cellpadding="5">
-                        <p:outputPanel>
-                            <h:outputText value="Search all fields:" />
-                            <p:inputText  id="globalFilter" onkeyup="PF('tableDevices').filter(#{deviceSnmpBean.device.identificacao})" style="width:200px" placeholder="Pesquisa"/>
-                        </p:outputPanel>
-
-                        <h:commandLink>
-                            <p:graphicImage  library="imagens" name="pdf.png" width="24"/>
-                            <p:dataExporter type="pdf" target="devices" fileName="Dispositivos" />
-                        </h:commandLink>
-                    </h:panelGrid>
-                </div>
-            </f:facet>
+            <!--             <f:facet name="header">
+            
+                            <div align="left" style="width: 600px">
+                                <h:panelGrid columns="3" cellpadding="5">
+                                    <p:outputPanel>
+                                        <h:outputText value="Search all fields:" />
+                                        <p:inputText  id="globalFilter" onkeyup="PF('tableDevices').filter(#{deviceSnmpBean.device.identificacao})" style="width:200px" placeholder="Pesquisa"/>
+                                    </p:outputPanel>
+            
+                                    <h:commandLink>
+                                        <p:graphicImage  library="imagens" name="pdf.png" width="24"/>
+                                        <p:dataExporter type="pdf" target="devices" fileName="Dispositivos" />
+                                    </h:commandLink>
+                                </h:panelGrid>
+                            </div>
+                        </f:facet>-->
 
             <p:column  sortBy="#{dev.id}" headerText="Id" filterBy="#{dev.id}" filterMatchMode="contains">
                 <h:outputText value="#{dev.id}" />
@@ -72,16 +83,16 @@
             </p:column>
 
             <p:column  headerText="Porta Inicial" >
-                <h:outputText value="#{dev.oid.portInicial}" />
+                <h:outputText value="#{dev.portInicial}" />
             </p:column>
 
             <p:column  headerText="Porta Final" >
-                <h:outputText value="#{dev.oid.portFinal}" />
+                <h:outputText value="#{dev.portFinal}" />
             </p:column>
         </p:dataTable>
     </h:form>
 
-    <p:dialog header="Cadastro Dispositivo" widgetVar="cadastroDispositivoDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="explode" resizable="false">
+    <p:dialog header="Cadastro Dispositivo" widgetVar="cadastroDispositivoDialog" modal="true" appendTo="@(body)" showEffect="fade"  hideEffect="explode" resizable="false" responsive="true">
 
         <p:tabView widgetVar="tabView">
 
@@ -104,22 +115,30 @@
                             <p:message for="version" />
                         </h:panelGrid>
 
-                        <p:outputLabel value="OID:" for="dd" />
+                        
+
+                        <p:outputLabel value="OID Teste:" for="oid" />
                         <h:panelGrid columns="1"  >
-                            <p:autoComplete  id="dd" dropdown="true" value="#{deviceBean.oid.descricao}" required="true" size="33" completeMethod="#{deviceBean.completeOID}"/>
-                            <p:message for="dd" />
+                            <p:selectOneMenu id="oid" value="#{deviceBean.oid.id}" required="true" style="width:200px">
+                                <f:selectItem itemLabel="Selecione um OID" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{deviceBean.allOID}" var="oid" itemLabel="#{oid.descricao}" itemValue="#{oid.id}" />
+                            </p:selectOneMenu>
+                            <p:message for="oid" />
                         </h:panelGrid>
 
                         <h:outputLabel for="oidini" value="Porta Inicial:" />
                         <h:panelGrid columns="1"  >
-                            <p:inputText id="oidini" type="number" value="#{deviceBean.oid.portInicial}" required="true" label="Porta Inicial" size="37"/>
+                            <p:inputText id="oidini"  binding="#{portaInicialBiding}" value="#{deviceBean.device.portInicial}" required="true" label="Porta Inicial" size="37"/>
                             <p:message for="oidini" />
                         </h:panelGrid>
 
 
                         <h:outputLabel for="oidfinal" value="Porta Final:" />
                         <h:panelGrid columns="1"  >
-                            <p:inputText id="oidfinal" value="#{deviceBean.oid.portFinal}" required="true" label="Porta Final" size="37"/>
+                            <p:inputText id="oidfinal" value="#{deviceBean.device.portFinal}" required="true" label="Porta Final" size="37" >
+                                <f:validator validatorId="portValidator" />
+                                <f:attribute name="portaInicial" value="#{portaInicialBiding.value}" />           
+                            </p:inputText>
                             <p:message for="oidfinal" />
                         </h:panelGrid>
 
@@ -131,7 +150,9 @@
 
                         <h:outputLabel for="ip" value="IP:" />
                         <h:panelGrid columns="1"  >
-                            <p:inputText id="ip" value="#{deviceBean.device.ip}" required="true" label="IP"  size="37"/>
+                            <p:inputText id="ip" value="#{deviceBean.device.ip}" required="true" label="IP"  size="37" >
+                                <f:validator validatorId="ipValidator" />
+                            </p:inputText>
                             <p:watermark for="ip" value="Ex.: 255.255.255.255" id="watermark" />
                             <p:message for="ip" />
                         </h:panelGrid>
@@ -215,14 +236,14 @@
 
                     <h:outputLabel for="oidini" value="Porta Inicial:" />
                     <h:panelGrid columns="1"  >
-                        <p:inputText id="oidini" type="number" value="#{deviceBean.oid.portInicial}" required="true" label="Porta Inicial" size="37"/>
+                        <p:inputText id="oidini" type="number" value="#{deviceBean.device.portInicial}" required="true" label="Porta Inicial" size="37"/>
                         <p:message for="oidini" />
                     </h:panelGrid>
 
 
                     <h:outputLabel for="oidfinal" value="Porta Final:" />
                     <h:panelGrid columns="1"  >
-                        <p:inputText id="oidfinal" value="#{deviceBean.oid.portFinal}" required="true" label="Porta Final" size="37"/>
+                        <p:inputText id="oidfinal" value="#{deviceBean.device.portFinal}" required="true" label="Porta Final" size="37"/>
                         <p:message for="oidfinal" />
                     </h:panelGrid>
 
@@ -243,7 +264,7 @@
             </p:outputPanel>
             <h:panelGrid columns="6" cellpadding="3">
                 <p:commandButton  update="formEditar" styleClass="edit" actionListener="#{deviceBean.editDevice()}" action="#{deviceBean.reinit}" icon="ui-icon-pencil" value="Editar"  >
-                 <p:confirm header="Editar Dispositivo" message="Deseja realmente editar o dipositivo?" icon="ui-icon-alert" />
+                    <p:confirm header="Editar Dispositivo" message="Deseja realmente editar o dipositivo?" icon="ui-icon-alert" />
                 </p:commandButton>
                 <span class="ui-separator">
                     <span class="ui-icon ui-icon-grip-dotted-vertical" />

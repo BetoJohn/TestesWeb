@@ -12,10 +12,20 @@ import java.io.Serializable;
  * @author carlos.macedo
  */
 public class OID implements Serializable {
+    private int id;
     private String descricao;
-    private int portInicial;
-    private int portFinal;
+//    private Integer portInicial;
+//    private Integer portFinal;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public String getDescricao() {
         return descricao;
     }
@@ -24,25 +34,25 @@ public class OID implements Serializable {
         this.descricao = descricao;
     }
 
-    public int getPortInicial() {
-        return portInicial;
-    }
-
-    public void setPortInicial(int portInicial) {
-        this.portInicial = portInicial;
-    }
-
-    public int getPortFinal() {
-        return portFinal;
-    }
-
-    public void setPortFinal(int portFinal) {
-        this.portFinal = portFinal;
-    }
+//    public Integer getPortInicial() {
+//        return portInicial;
+//    }
+//
+//    public void setPortInicial(Integer portInicial) {
+//        this.portInicial = portInicial;
+//    }
+//
+//    public Integer getPortFinal() {
+//        return portFinal;
+//    }
+//
+//    public void setPortFinal(Integer portFinal) {
+//        this.portFinal = portFinal;
+//    }
 
     @Override
     public String toString() {
-        return " OID Descrição: "+descricao+" | Port Inicial: "+ portInicial+" | Port Final: "+portFinal; //To change body of generated methods, choose Tools | Templates.
+        return ""+descricao; //To change body of generated methods, choose Tools | Templates.
     }
     
     

@@ -18,6 +18,8 @@ public class Device implements Serializable{
     private OID oid;
     private String comunidade;
     private String ip;
+    private Integer portInicial;
+    private Integer portFinal;
 
     public int getId() {
         return id;
@@ -52,6 +54,8 @@ public class Device implements Serializable{
         this.oid = oid;
     }
 
+   
+
     public String getComunidade() {
         return comunidade;
     }
@@ -68,9 +72,27 @@ public class Device implements Serializable{
         this.ip = ip;
     }
 
+    public Integer getPortInicial() {
+        return portInicial;
+    }
+
+    public void setPortInicial(Integer portInicial) {
+        this.portInicial = portInicial;
+    }
+
+    public Integer getPortFinal() {
+        return portFinal;
+    }
+
+    public void setPortFinal(Integer portFinal) {
+        this.portFinal = portFinal;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Indentificação: "+identificacao+" | Versão: "+versao+" | Comunidade: "+comunidade+" | IP: "+ip; 
+        return "Indentificação: "+identificacao+" | Versão: "+versao+" | Comunidade: "+comunidade+" | IP: "+ip+" | Port Inicial: "+ portInicial+" | Port Final: "+portFinal; 
     }
     
     

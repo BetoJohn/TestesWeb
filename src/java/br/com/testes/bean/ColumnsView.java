@@ -53,7 +53,7 @@ public class ColumnsView implements Serializable {
     @PostConstruct
     public void init() {
         //cars = service.createCars(55);// quantidade de carros criados
-         devices = SnmpBO.getInstance().getAllDevices();
+     //    devices = SnmpBO.getInstance().getAllDevices();
         createDynamicColumns();
     }
 
