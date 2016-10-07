@@ -7,6 +7,7 @@ package br.com.snmp.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -69,4 +70,42 @@ public class DataSnmp {
         this.status = status;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + this.port;
+        hash = 13 * hash + this.value;
+        hash = 13 * hash + Objects.hashCode(this.status);
+        hash = 13 * hash + this.device_id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DataSnmp other = (DataSnmp) obj;
+        if (this.port != other.port) {
+            return false;
+        }
+        if (this.value != other.value) {
+            return false;
+        }
+        if (this.device_id != other.device_id) {
+            return false;
+        }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }

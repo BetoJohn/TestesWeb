@@ -203,7 +203,7 @@ public class SnmpDAO extends DaoBase {
             ps = createPreparedStatement(sql);
             ps.setObject(1, snmp.getPort());
             ps.setObject(2, snmp.getValue());
-            ps.setObject(3, snmp.getStatus());
+            ps.setString(3, snmp.getStatus());
             ps.setObject(4, snmp.getDevice_id());
             ps.setTimestamp(5, util.getDateTimestamp());
             ps.executeUpdate();
@@ -212,6 +212,48 @@ public class SnmpDAO extends DaoBase {
             e.printStackTrace();
             throw e;
         } finally {
+            try {
+                ps.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+
+    public List<DataSnmp> getAllSnmpDevice() throws Exception {
+
+        List<DataSnmp> listReturn_File = new ArrayList<>();
+        
+        String sql = "SELECT id, port, valor, status, device_id, data_hora\n"
+                + "  FROM snmp_device";
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+
+        try {
+            ps = createPreparedStatement(sql);
+            rs = ps.executeQuery();
+
+             
+            while (rs.next()) {
+                DataSnmp snmp = new DataSnmp();
+                snmp.setId(rs.getInt("id"));
+                snmp.setPort(rs.getInt("port"));
+                snmp.setValue(rs.getInt("valor"));
+                snmp.setStatus(rs.getString("status"));
+                snmp.setDevice_id(rs.getInt("device_id"));
+                snmp.setTime(rs.getTimestamp("data_hora"));
+                listReturn_File.add(snmp);
+            }
+
+            return listReturn_File;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
             try {
                 ps.close();
             } catch (Exception e) {

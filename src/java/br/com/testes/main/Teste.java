@@ -165,7 +165,7 @@ public class Teste {
 
         xStream.alias("device", ReturnSnmp.class);
         ReturnSnmp rs = new ReturnSnmp();
-        rs.setIpDevice("10.104.1.111");
+       // rs.setIpDevice("10.104.1.111");
 //        rs.setPort(1);
 //        rs.setStatus("UP");
 //        rs.setValue(1);

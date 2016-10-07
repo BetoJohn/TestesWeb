@@ -49,7 +49,7 @@ public class SnmpBO {
     }
 
     public List<Device> getAllDevices() throws Exception {
-       Connection con = null;
+        Connection con = null;
         try {
 
             con = DataSource.getInstance().getConnection();
@@ -96,7 +96,7 @@ public class SnmpBO {
             con.close();
         }
     }
-    
+
     public void insertSnmpDevice(DataSnmp snmp) throws Exception {
         Connection con = null;
         try {
@@ -112,9 +112,25 @@ public class SnmpBO {
             con.close();
         }
     }
-    
-     public DataSnmp getSnmpDeviceByIdDeviceAndPort(int device_id, int port) throws Exception{
-         Connection con = null;
+
+    public List<DataSnmp> getAllSnmpDevice()  throws Exception {
+        Connection con = null;
+        try {
+
+            con = DataSource.getInstance().getConnection();
+            SnmpDAO dao = new SnmpDAO(con);
+            return dao.getAllSnmpDevice();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            con.close();
+        }
+    }
+
+    public DataSnmp getSnmpDeviceByIdDeviceAndPort(int device_id, int port) throws Exception {
+        Connection con = null;
         try {
 
             con = DataSource.getInstance().getConnection();
@@ -127,9 +143,10 @@ public class SnmpBO {
         } finally {
             con.close();
         }
-     }
-      public void updateSnmpDevice(DataSnmp snmp) throws Exception {
-           Connection con = null;
+    }
+
+    public void updateSnmpDevice(DataSnmp snmp) throws Exception {
+        Connection con = null;
         try {
 
             con = DataSource.getInstance().getConnection();
@@ -142,7 +159,7 @@ public class SnmpBO {
         } finally {
             con.close();
         }
-      }
+    }
 //
 //    public List<Device> getByIdentificacao(Device dev) {
 //        return SnmpDAO.getInstance().getByIdentificacao(dev);

@@ -6,6 +6,7 @@
 package br.com.testes.util;
 
 import br.com.snmp.model.ComparateValue;
+import br.com.snmp.model.DataSnmp;
 import br.com.snmp.model.ResultSnmp;
 import br.com.snmp.model.ReturnSnmp;
 import com.google.gson.Gson;
@@ -143,42 +144,24 @@ public class Util {
         return null;
     }
 
-    //Esse método se mostra mais eficiente por tambem analisar os ids dos devices, dessa forma posso saber qual dispositivo teve alteração pelo seu id
-    //O método vai retornar uma lista contendo os valores que foram alterados, o parametro vai seguir a ordem, onde l1 são os 
-    //novos valores e l2 será o arquivo que foi gerado, ou seja, os valores antigos.
-    public List<ComparateValue> compareList(List<ReturnSnmp> l1, List<ReturnSnmp> l2) throws IOException {
-        Util util = new Util();
-        List<ComparateValue> resultado1 = new ArrayList<>();
-
-        for (ReturnSnmp dev : l1) {
-            for (ResultSnmp result1 : dev.getResult()) {
-                ComparateValue value = new ComparateValue();
-                value.setDevice_id(dev.getDevice_id());
-                value.setResult(result1);
-                resultado1.add(value);
-
-            }
-        }
-
-        List<ComparateValue> resultado2 = new ArrayList<>();
-        for (ReturnSnmp dev : l2) {
-            for (ResultSnmp result2 : dev.getResult()) {
-                ComparateValue value = new ComparateValue();
-                value.setDevice_id(dev.getDevice_id());
-                value.setResult(result2);
-                resultado2.add(value);
-
-            }
-
-        }
+    
+    /***
+     * 
+     * @param l1 dados da consulta snmp
+     * @param l2 dados salvos no banco
+     * @return uma lista com os valores que sofreram alteração
+     * @throws IOException 
+     */
+    public List<DataSnmp> compareList(List<DataSnmp> l1, List<DataSnmp> l2) throws IOException {
+        Util util = new Util();     
         //Dessa forma consigo criar uma lista com os valores 
-        List<ComparateValue> valuesUpdated = new ArrayList<>();
+        List<DataSnmp> valuesUpdated = new ArrayList<>();
         boolean resultValue;
         //resultado1.size() == resultado2.size() &&
-        if (resultado1 != null && resultado2 != null) {
+        if (l1 != null && l2 != null) {
             // make a copy of the list so the original list is not changed, and remove() is supported
-            ArrayList<ComparateValue> cp = new ArrayList<>(resultado1);
-            for (ComparateValue value : resultado2) {
+            ArrayList<DataSnmp> cp = new ArrayList<>(l1);
+            for (DataSnmp value : l2) {
                 if (!cp.remove(value)) {
                     valuesUpdated.add(value);
                     resultValue = false;

@@ -55,7 +55,7 @@ public class SnmpBean {
                     .newTrigger()
                     .withIdentity("dummyTriggerName", "group1")
                     .withSchedule(
-                            SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(1).repeatForever())
+                            SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(2).repeatForever())
                     .build();
 
 //            List<JobExecutionContext> list = scheduler.getCurrentlyExecutingJobs();

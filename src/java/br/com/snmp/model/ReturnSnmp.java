@@ -13,9 +13,9 @@ import java.util.List;
  * @author carlos.macedo
  */
 public class ReturnSnmp {
+    
     private int device_id;
     private Date time;
-    private String ipDevice;
     private List<ResultSnmp> result;
 
     public int getDevice_id() {
@@ -24,15 +24,7 @@ public class ReturnSnmp {
 
     public void setDevice_id(int device_id) {
         this.device_id = device_id;
-    }
-   
-    public String getIpDevice() {
-        return ipDevice;
-    }
-
-    public void setIpDevice(String ipDevice) {
-        this.ipDevice = ipDevice;
-    }
+    }   
 
     public List<ResultSnmp> getResult() {
         return result;
