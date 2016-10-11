@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/snmp/model/DataSnmp.java</file>
             <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/snmp/DAO/SnmpDAO.java</file>
             <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/snmp/service/SnmpService.java</file>
+            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/snmp/connection/DataSource1.java</file>
             <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/snmp/BO/SnmpBO.java</file>
+            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/testes/bean/DeviceBeanTeste.java</file>
             <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/testes/util/Util.java</file>
+            <file>file:/C:/Users/carlos.macedo/Documents/NetBeansProjects/TestesWeb/src/java/br/com/testes/job/JobGetSnmp.java</file>
         </group>
     </open-files>
 </project-private>

@@ -7,6 +7,7 @@ package br.com.snmp.BO;
 
 import br.com.snmp.DAO.SnmpDAO;
 import br.com.snmp.connection.DataSource;
+import br.com.snmp.connection.DataSource1;
 import br.com.snmp.model.DataSnmp;
 import br.com.snmp.model.Device;
 import br.com.snmp.model.OID;
@@ -52,7 +53,7 @@ public class SnmpBO {
         Connection con = null;
         try {
 
-            con = DataSource.getInstance().getConnection();
+            con = DataSource1.getInstance().getConnection();
             SnmpDAO dao = new SnmpDAO(con);
             return dao.getAllDevices();
 

@@ -189,7 +189,6 @@ public class SnmpDAO extends DaoBase {
             } catch (Exception e) {
             }
         }
-
     }
 
     public void insertSnmpDevice(DataSnmp snmp) throws Exception {

@@ -179,6 +179,8 @@ public class DeviceBeanTeste implements Serializable {
     }
 
     public List<Device> getAllDevices() throws Exception {
+        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        System.out.println("Path: "+path);
         List<Device> list = new ArrayList<>();
         list = SnmpBO.getInstance().getAllDevices();
         listDevices = list;
